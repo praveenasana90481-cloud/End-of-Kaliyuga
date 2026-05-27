@@ -228,6 +228,12 @@
 
         document.getElementById("feedbackBox").style.display = "block";
       }
+      function clearFeedback() {
+        localStorage.removeItem("epicFeedback");
+        document.getElementById("summary").innerHTML = "";
+        document.getElementById("feedbackBox").style.display = "none";
+        alert("All feedback has been cleared!");
+      }
       
       window.onload = function () {
         let saved = JSON.parse(localStorage.getItem("epicFeedback"));
