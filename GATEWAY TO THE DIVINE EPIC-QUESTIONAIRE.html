@@ -175,7 +175,6 @@
       <input type="radio" id="q3" name="quality" value="Power"><label for="q3">Pure Power</label>
       <br>
       <button onclick="saveAnswers()">SUBMIT FEEDBACK</button>
-      <button id="clearBtn" onclick="clearFeedback()">CLEAR ALL FEEDBACK</button>
     </div>
     <div id="feedbackBox">
       <h2 style="color: blueviolet; border-bottom: 2px solid #ccc;">Divine Feedback Logged</h2>
@@ -228,14 +227,7 @@
 
         document.getElementById("feedbackBox").style.display = "block";
       }
-
-      function clearFeedback() {
-        localStorage.removeItem("epicFeedback");
-        document.getElementById("summary").innerHTML = "";
-        document.getElementById("feedbackBox").style.display = "none";
-        alert("All feedback has been cleared!");
-      }
-
+      
       window.onload = function () {
         let saved = JSON.parse(localStorage.getItem("epicFeedback"));
         if (Array.isArray(saved)) {
