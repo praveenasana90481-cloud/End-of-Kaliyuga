@@ -188,60 +188,185 @@
       <h2 style="color:blue;">tinyurl.com/end-of-kaliyug</h2><h3>(or)</h3><h2 style="color:blue;">tinyurl.com/End-of-Kaliyuga</h2>
     </div>
     <script>
-      function saveAnswers() {
-        const coveredEl = document.querySelector('input[name="covered"]:checked');
-        const visualsEl = document.querySelector('input[name="visuals"]:checked');
-        const qualityEl = document.querySelector('input[name="quality"]:checked');
 
-        const covered = coveredEl ? coveredEl.value : "N/A";
-        const role = document.getElementById("battleRole").value;
-        const visuals = visualsEl ? visualsEl.value : "N/A";
-        const improveText = document.getElementById("improveText").value || "No suggestions";
-        const quality = qualityEl ? qualityEl.value : "N/A";
+const WEBAPP_URL =
+  "https://script.google.com/macros/s/AKfycbzqQiI4n2HkakM1guEKogr2KIaywbfOBVYyKweqdzWinG9-qHhfSfwBJqty62eXq0cvOg/exec";
 
-        const newFeedback = { covered, role, visuals, improveText, quality };
 
-        let allFeedback = JSON.parse(localStorage.getItem("epicFeedback"));
-        if (!Array.isArray(allFeedback)) {
-          allFeedback = [];
-        }
 
-        allFeedback.push(newFeedback);
-        localStorage.setItem("epicFeedback", JSON.stringify(allFeedback));
-        alert("The Gateway opens soon with Updates Given By you. Your feedback Has Been Saved!");
-        showFeedback(allFeedback);
-      }
+async function saveAnswers() {
 
-      function showFeedback(allFeedback) {
-        const summary = document.getElementById("summary");
-        summary.innerHTML = "";
+  // Get selected radio buttons
+  const coveredEl =
+    document.querySelector('input[name="covered"]:checked');
 
-        if (Array.isArray(allFeedback)) {
-          allFeedback.forEach((data, index) => {
-            summary.innerHTML += `
-          <div class="review-item">
-            <h3>Feedback #${index + 1}</h3>
-            <b>Knowledge about Chiranjeevas:</b> ${data.covered} <br>
-            <b>Battle Role:</b> ${data.role} <br>
-            <b>Visual Feedback:</b> ${data.visuals} <br>
-            <b>Your Idea:</b> "${data.improveText}" <br>
-            <b>Kalki Attribute:</b> ${data.quality} <br>
-          </div>
-        `;
-          });
-        }
+  const visualsEl =
+    document.querySelector('input[name="visuals"]:checked');
 
-        document.getElementById("feedbackBox").style.display = "block";
-      }
-      
-      window.onload = function () {
-        let saved = JSON.parse(localStorage.getItem("epicFeedback"));
-        if (Array.isArray(saved)) {
-          showFeedback(saved);
-        }
-      };
+  const qualityEl =
+    document.querySelector('input[name="quality"]:checked');
+
+
+
+  // Get values
+  const covered =
+    coveredEl ? coveredEl.value : "N/A";
+
+  const role =
+    document.getElementById("battleRole").value;
+
+  const visuals =
+    visualsEl ? visualsEl.value : "N/A";
+
+  const improveText =
+    document.getElementById("improveText").value || "No suggestions";
+
+  const quality =
+    qualityEl ? qualityEl.value : "N/A";
+
+
+
+  // Create feedback object
+  const feedbackData = {
+
+    covered: covered,
+    role: role,
+    visuals: visuals,
+    improveText: improveText,
+    quality: quality
+
+  };
+
+
+
+  try {
+
+    // Send data to Google Sheets
+    const response = await fetch(WEBAPP_URL, {
+
+      method: "POST",
+
+      body: JSON.stringify(feedbackData)
+
+    });
+
+
+
+    const result = await response.text();
+
+    console.log(result);
+
+
+
+    alert(
+      "The Gateway opens soon with Updates Given By You. Your feedback has been saved!"
+    );
+
+
+
+    // Reload feedback list
+    loadFeedback();
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    alert("Error saving feedback!");
+
+  }
+
+}
+
+
+
+
+
+async function loadFeedback() {
+
+  try {
+
+    // Get feedback from Google Sheets
+    const response = await fetch(WEBAPP_URL);
+
+    const allFeedback = await response.json();
+
+
+
+    const summary =
+      document.getElementById("summary");
+
+
+
+    // Clear old content
+    summary.innerHTML = "";
+
+
+
+    // Show latest feedback first
+    allFeedback.reverse().forEach((data, index) => {
+
+      summary.innerHTML += `
+
+        <div class="review-item">
+
+          <h3>Feedback #${index + 1}</h3>
+
+          <b>Knowledge about Chiranjeevas:</b>
+          ${data.covered}
+          <br><br>
+
+          <b>Battle Role:</b>
+          ${data.role}
+          <br><br>
+
+          <b>Visual Feedback:</b>
+          ${data.visuals}
+          <br><br>
+
+          <b>Your Idea:</b>
+          "${data.improveText}"
+          <br><br>
+
+          <b>Kalki Attribute:</b>
+          ${data.quality}
+          <br>
+
+        </div>
+
+      `;
+
+    });
+
+
+
+    // Show feedback section
+    document.getElementById("feedbackBox")
+      .style.display = "block";
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+  }
+
+}
+
+
+
+
+
+// Load feedback when page opens
+window.onload = function () {
+
+  loadFeedback();
+
+};
+
     </script>
-
 </body>
 
 </html>
