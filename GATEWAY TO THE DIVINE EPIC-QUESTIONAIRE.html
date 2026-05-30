@@ -261,9 +261,6 @@ body {
   </h2>
 
 </div>
-
-
-
 <script>
 
 const WEBAPP_URL =
@@ -288,6 +285,7 @@ async function saveAnswers() {
   const improveText =
     document.getElementById("improveText").value.trim();
 
+
   // Validation
   if (
     !coveredEl ||
@@ -296,10 +294,11 @@ async function saveAnswers() {
     role === "None"
   ) {
 
-    alert("Please answer all required questions.");
+    alert("Please answer all questions.");
     return;
 
   }
+
 
   const feedbackData = {
 
@@ -311,32 +310,76 @@ async function saveAnswers() {
     quality: qualityEl.value
 
   };
-try {
 
-  await fetch(WEBAPP_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify(feedbackData)
-  });
 
-  alert(
-    "The Gateway opens soon with updates given by you. Your feedback has been saved!"
-  );
+  try {
 
-  loadFeedback();
+    await fetch(WEBAPP_URL, {
+
+      method: "POST",
+
+      mode: "no-cors",
+
+      headers: {
+        "Content-Type":
+          "text/plain;charset=utf-8"
+      },
+
+      body:
+        JSON.stringify(feedbackData)
+
+    });
+
+
+    alert(
+      "The Gateway opens soon with updates given by you. Your feedback has been saved!"
+    );
+
+
+    // Reset form
+    document
+      .querySelectorAll(
+        'input[type="radio"]'
+      )
+      .forEach(
+        radio =>
+        radio.checked = false
+      );
+
+    document
+      .getElementById(
+        "battleRole"
+      )
+      .selectedIndex = 0;
+
+    document
+      .getElementById(
+        "improveText"
+      )
+      .value = "";
+
+
+    // Reload feedback after delay
+    setTimeout(
+      loadFeedback,
+      1500
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Error saving feedback."
+    );
+
+  }
 
 }
 
-catch (error) {
 
-  console.error(error);
-
-  alert("Saving failed.");
-
-}
 
 // LOAD FEEDBACK
 async function loadFeedback() {
@@ -344,15 +387,9 @@ async function loadFeedback() {
   try {
 
     const response =
-      await fetch(WEBAPP_URL);
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Failed to load feedback"
+      await fetch(
+        WEBAPP_URL
       );
-
-    }
 
     const allFeedback =
       await response.json();
@@ -364,74 +401,84 @@ async function loadFeedback() {
 
     summary.innerHTML = "";
 
+
     if (
-      !allFeedback ||
       allFeedback.length === 0
     ) {
 
       summary.innerHTML =
-        "<p>No feedback submitted yet.</p>";
+        "<p>No feedback yet.</p>";
 
       document
         .getElementById(
           "feedbackBox"
         )
-        .style.display = "block";
+        .style.display =
+        "block";
 
       return;
 
     }
 
+
     allFeedback.reverse();
+
 
     allFeedback.forEach(
       (data, index) => {
 
         summary.innerHTML += `
 
-        <div class="review-item">
+<div class="review-item">
 
-          <h3>
-            Feedback #${index + 1}
-          </h3>
+<h3>
+Feedback #${index + 1}
+</h3>
 
-          <p>
-            <b>Knowledge about Chiranjeevas:</b>
-            ${data.covered || "N/A"}
-          </p>
+<p>
+<b>Knowledge:</b>
+${data.covered}
+</p>
 
-          <p>
-            <b>Battle Role:</b>
-            ${data.role || "N/A"}
-          </p>
+<p>
+<b>Battle Role:</b>
+${data.role}
+</p>
 
-          <p>
-            <b>Visual Feedback:</b>
-            ${data.visuals || "N/A"}
-          </p>
+<p>
+<b>Visual Feedback:</b>
+${data.visuals}
+</p>
 
-          <p>
-            <b>Suggestion:</b>
-            ${data.improveText || "None"}
-          </p>
+<p>
+<b>Suggestion:</b>
+${data.improveText}
+</p>
 
-          <p>
-            <b>Kalki Attribute:</b>
-            ${data.quality || "N/A"}
-          </p>
+<p>
+<b>Kalki Attribute:</b>
+${data.quality}
+</p>
 
-        </div>
+<p>
+<b>Time:</b>
+${data.time}
+</p>
 
-        `;
+</div>
+
+`;
 
       }
     );
+
 
     document
       .getElementById(
         "feedbackBox"
       )
-      .style.display = "block";
+      .style.display =
+      "block";
 
   }
 
