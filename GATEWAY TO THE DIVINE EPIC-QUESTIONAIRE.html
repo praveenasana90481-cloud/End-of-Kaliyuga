@@ -311,69 +311,32 @@ async function saveAnswers() {
     quality: qualityEl.value
 
   };
+try {
 
-  try {
+  await fetch(WEBAPP_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(feedbackData)
+  });
 
-    const response =
-      await fetch(WEBAPP_URL, {
+  alert(
+    "The Gateway opens soon with updates given by you. Your feedback has been saved!"
+  );
 
-        method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body:
-          JSON.stringify(feedbackData)
-
-      });
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Server returned an error"
-      );
-
-    }
-
-    alert(
-      "The Gateway opens soon with updates given by you. Your feedback has been saved!"
-    );
-
-    // Reset form
-    document
-      .querySelectorAll(
-        'input[type="radio"]'
-      )
-      .forEach(r => r.checked = false);
-
-    document
-      .getElementById("battleRole")
-      .selectedIndex = 0;
-
-    document
-      .getElementById("improveText")
-      .value = "";
-
-    // Reload feedback
-    loadFeedback();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Error saving feedback. Please try again."
-    );
-
-  }
+  loadFeedback();
 
 }
 
+catch (error) {
 
+  console.error(error);
+
+  alert("Saving failed.");
+
+}
 
 // LOAD FEEDBACK
 async function loadFeedback() {
