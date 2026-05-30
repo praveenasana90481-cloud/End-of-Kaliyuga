@@ -468,7 +468,117 @@ async function saveAnswers() {
 
 }
 
+// LOAD FEEDBACK
+async function loadFeedback() {
 
+  try {
+
+
+    const result = await response.json();
+    const allFeedback = result.data || result;
+    const summary =
+      document.getElementById("summary");
+
+    summary.innerHTML = "";
+
+    if (
+      !allFeedback ||
+      allFeedback.length === 0
+    ) {
+
+      summary.innerHTML =
+        "<h3>No feedback yet.</h3>";
+
+      document
+        .getElementById("feedbackBox")
+        .style.display = "block";
+
+      return;
+
+    }
+
+    allFeedback.reverse();
+
+    allFeedback.forEach((data, index) => {
+
+      summary.innerHTML += `
+
+      <div class="review-item">
+
+        <h3>
+          Feedback #${allFeedback.length - index}
+        </h3>
+
+        <div>
+          <b>Knowledge:</b>
+          ${data.covered || "N/A"}
+        </div>
+
+        <br>
+
+        <div>
+          <b>Battle Role:</b>
+          ${data.role || "N/A"}
+        </div>
+
+        <br>
+
+        <div>
+          <b>Visual Feedback:</b>
+          ${data.visuals || "N/A"}
+        </div>
+
+        <br>
+
+        <div>
+          <b>Suggestion:</b>
+          ${data.improveText || "None"}
+        </div>
+
+        <br>
+
+        <div>
+          <b>Kalki Attribute:</b>
+          ${data.quality || "N/A"}
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+    document
+      .getElementById("feedbackBox")
+      .style.display = "block";
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    document
+      .getElementById("summary")
+      .innerHTML =
+      "<h3>Unable to load feedback.</h3>";
+
+    document
+      .getElementById("feedbackBox")
+      .style.display = "block";
+
+  }
+
+}
+
+
+
+// LOAD REVIEWS WHEN PAGE OPENS
+window.onload = function () {
+
+  loadFeedback();
+
+};
 
 //
 </html>
