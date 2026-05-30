@@ -261,29 +261,64 @@ body {
   </h2>
 
 </div>
+</body>
 <script>
 
 const WEBAPP_URL =
-"https://script.google.com/macros/s/AKfycbzqQiI4n2HkakM1guEKogr2KIaywbfOBVYyKweqdzWinG9-qHhfSfwBJqty62eXq0cvOg/exec";
+"https://script.google.com/macros/s/AKfycbzP9dc5oY2YRxRWLj-uC8hiafhF332Y2lXYZKN7uhNiI_ocdMrnwUX4Sxfja18SvswiTA/exec";
+
 
 
 // SAVE FEEDBACK
 async function saveAnswers() {
 
+  // Prevent repeat submissions for 24 hours
+  const lastSubmit =
+    localStorage.getItem("lastSubmit");
+
+  if (lastSubmit) {
+
+    const hours =
+      (Date.now() - Number(lastSubmit))
+      / (1000 * 60 * 60);
+
+    if (hours < 24) {
+
+      alert(
+        "You have already submitted feedback. Please try again after 24 hours."
+      );
+
+      return;
+
+    }
+
+  }
+
   const coveredEl =
-    document.querySelector('input[name="covered"]:checked');
+    document.querySelector(
+      'input[name="covered"]:checked'
+    );
 
   const visualsEl =
-    document.querySelector('input[name="visuals"]:checked');
+    document.querySelector(
+      'input[name="visuals"]:checked'
+    );
 
   const qualityEl =
-    document.querySelector('input[name="quality"]:checked');
+    document.querySelector(
+      'input[name="quality"]:checked'
+    );
 
   const role =
-    document.getElementById("battleRole").value;
+    document.getElementById(
+      "battleRole"
+    ).value;
 
   const improveText =
-    document.getElementById("improveText").value.trim();
+    document.getElementById(
+      "improveText"
+    ).value.trim();
+
 
 
   // Validation
@@ -294,46 +329,89 @@ async function saveAnswers() {
     role === "None"
   ) {
 
-    alert("Please answer all questions.");
+    alert(
+      "Please answer all questions."
+    );
+
     return;
 
   }
 
 
+
   const feedbackData = {
 
-    covered: coveredEl.value,
-    role: role,
-    visuals: visualsEl.value,
+    covered:
+      coveredEl.value,
+
+    role:
+      role,
+
+    visuals:
+      visualsEl.value,
+
     improveText:
-      improveText || "No suggestions",
-    quality: qualityEl.value
+      improveText ||
+      "No suggestions",
+
+    quality:
+      qualityEl.value
 
   };
 
 
+
+  const btn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+  btn.disabled = true;
+  btn.innerHTML =
+    "Submitting...";
+
+
+
   try {
 
-    await fetch(WEBAPP_URL, {
+    await fetch(
+      WEBAPP_URL,
+      {
 
-      method: "POST",
+        method:
+          "POST",
 
-      mode: "no-cors",
+        mode:
+          "no-cors",
 
-      headers: {
-        "Content-Type":
-          "text/plain;charset=utf-8"
-      },
+        headers: {
 
-      body:
-        JSON.stringify(feedbackData)
+          "Content-Type":
+            "text/plain;charset=utf-8"
 
-    });
+        },
+
+        body:
+          JSON.stringify(
+            feedbackData
+          )
+
+      }
+    );
+
+
+
+    localStorage.setItem(
+      "lastSubmit",
+      Date.now()
+    );
+
 
 
     alert(
-      "The Gateway opens soon with updates given by you. Your feedback has been saved!"
+      "Thank you! Your feedback has been saved."
     );
+
 
 
     // Reset form
@@ -343,7 +421,7 @@ async function saveAnswers() {
       )
       .forEach(
         radio =>
-        radio.checked = false
+          radio.checked = false
       );
 
     document
@@ -359,142 +437,32 @@ async function saveAnswers() {
       .value = "";
 
 
-    // Reload feedback after delay
+
     setTimeout(
       loadFeedback,
-      1500
+      1000
     );
-
-  }
-
-catch (error) {
-
-  console.error("Save Error:", error);
-
-  alert(
-    "Save Error: " + error.message
-  );
-
-  }
-
-}
-
-
-
-// LOAD FEEDBACK
-async function loadFeedback() {
-
-  try {
-
-    const response =
-      await fetch(
-        WEBAPP_URL
-      );
-
-    const allFeedback =
-      await response.json();
-
-    const summary =
-      document.getElementById(
-        "summary"
-      );
-
-    summary.innerHTML = "";
-
-
-    if (
-      allFeedback.length === 0
-    ) {
-
-      summary.innerHTML =
-        "<p>No feedback yet.</p>";
-
-      document
-        .getElementById(
-          "feedbackBox"
-        )
-        .style.display =
-        "block";
-
-      return;
-
-    }
-
-
-    allFeedback.reverse();
-
-
-    allFeedback.forEach(
-      (data, index) => {
-
-        summary.innerHTML += `
-
-<div class="review-item">
-
-<h3>
-Feedback #${index + 1}
-</h3>
-
-<p>
-<b>Knowledge:</b>
-${data.covered}
-</p>
-
-<p>
-<b>Battle Role:</b>
-${data.role}
-</p>
-
-<p>
-<b>Visual Feedback:</b>
-${data.visuals}
-</p>
-
-<p>
-<b>Suggestion:</b>
-${data.improveText}
-</p>
-
-<p>
-<b>Kalki Attribute:</b>
-${data.quality}
-</p>
-
-<p>
-<b>Time:</b>
-${data.time}
-</p>
-
-</div>
-
-`;
-
-      }
-    );
-
-
-    document
-      .getElementById(
-        "feedbackBox"
-      )
-      .style.display =
-      "block";
 
   }
 
   catch (error) {
 
     console.error(
-      "Load Error:",
       error
     );
 
-    document
-      .getElementById(
-        "summary"
-      )
-      .innerHTML =
-      "<p>Unable to load feedback.</p>";
+    alert(
+      "Unable to save feedback."
+    );
+
+  }
+
+  finally {
+
+    btn.disabled = false;
+
+    btn.innerHTML =
+      "SUBMIT FEEDBACK";
 
   }
 
@@ -502,15 +470,5 @@ ${data.time}
 
 
 
-// LOAD ON PAGE OPEN
-window.onload = function () {
-
-  loadFeedback();
-
-};
-
-</script>
-
-</body>
-
+//
 </html>
