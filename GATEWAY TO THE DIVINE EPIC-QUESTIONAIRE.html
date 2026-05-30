@@ -146,64 +146,117 @@
 </head>
 
 <body>
-  <div class="glass-container">
-    <h1>GATEWAY TO THE DIVINE EPIC</h1>
-    <div id="questions">
-      <p>1. Have you studied the previous lore of the Chiranjeevas?</p><br>
-      <input type="radio" id="cYes" name="covered" value="Yes"><label for="cYes">Yes</label>
-      <input type="radio" id="cNo" name="covered" value="No"><label for="cNo">No</label>
-      <br>
-      <p>2. In the Battle of Dharma, which role would you take?</p><br>
-      <select id="battleRole">
-        <option value="None">-- Choose your destiny --</option>
-        <option value="Warrior">Frontline Warrior (Strength)</option>
-        <option value="Strategist">Divine Strategist (Wisdom)</option>
-        <option value="Messenger">Messenger of Truth (Voice)</option>
-        <option value="Healer">Spiritual Healer (Compassion)</option>
-      </select>
-      <br>
-      <p>3. Do the previous page visuals capture the "Battle Feeling"?</p><br>
-      <input type="radio" id="v1" name="visuals" value="Epic"><label for="v1">It's Epic</label>
-      <input type="radio" id="v2" name="visuals" value="Needs Work"><label for="v2">Needs more intensity</label>
-      <br>
-      <p>4. What element would improve your immersion the most?</p><br>
-      <input type="text" id="improveText" placeholder="Example: Music, More Art, Quizzes...">
-      <br>
-      <p>5. Which Divine quality should Kalki emphasize first?</p><br>
-      <input type="radio" id="q1" name="quality" value="Justice"><label for="q1">Justice</label>
-      <input type="radio" id="q2" name="quality" value="Mercy"><label for="q2">Mercy</label>
-      <input type="radio" id="q3" name="quality" value="Power"><label for="q3">Pure Power</label>
-      <br>
-    </div>
+
+<div class="glass-container">
+
+  <h1>GATEWAY TO THE DIVINE EPIC</h1>
+
+  <div id="questions">
+
+    <p>1. Have you studied the previous lore of the Chiranjeevas?</p><br>
+
+    <input type="radio" id="cYes" name="covered" value="Yes">
+    <label for="cYes">Yes</label>
+
+    <input type="radio" id="cNo" name="covered" value="No">
+    <label for="cNo">No</label>
+
+    <br><br>
+
+    <p>2. In the Battle of Dharma, which role would you take?</p><br>
+
+    <select id="battleRole">
+      <option value="None">-- Choose your destiny --</option>
+      <option value="Warrior">Frontline Warrior (Strength)</option>
+      <option value="Strategist">Divine Strategist (Wisdom)</option>
+      <option value="Messenger">Messenger of Truth (Voice)</option>
+      <option value="Healer">Spiritual Healer (Compassion)</option>
+    </select>
+
+    <br><br>
+
+    <p>3. Do the previous page visuals capture the "Battle Feeling"?</p><br>
+
+    <input type="radio" id="v1" name="visuals" value="Epic">
+    <label for="v1">It's Epic</label>
+
+    <input type="radio" id="v2" name="visuals" value="Needs Work">
+    <label for="v2">Needs More Intensity</label>
+
+    <br><br>
+
+    <p>4. What element would improve your immersion the most?</p><br>
+
+    <input
+      type="text"
+      id="improveText"
+      placeholder="Example: Music, More Art, Quizzes..."
+    >
+
+    <br><br>
+
+    <p>5. Which Divine quality should Kalki emphasize first?</p><br>
+
+    <input type="radio" id="q1" name="quality" value="Justice">
+    <label for="q1">Justice</label>
+
+    <input type="radio" id="q2" name="quality" value="Mercy">
+    <label for="q2">Mercy</label>
+
+    <input type="radio" id="q3" name="quality" value="Power">
+    <label for="q3">Pure Power</label>
+
+    <br><br><br>
+
+    <button onclick="saveAnswers()">
+      SUBMIT FEEDBACK
+    </button>
+
   </div>
-<button onclick="saveAnswers()">
-  SUBMIT FEEDBACK
-</button>
 
-<div id="feedbackBox">
+  <div id="feedbackBox">
 
-  <div id="summary"></div>
+    <h2 style="color:white;">
+      Community Feedback
+    </h2>
+
+    <div id="summary"></div>
+
+  </div>
 
 </div>
-    <div id="share">
-      <h2>Please Share this to Your Friends & Family</h2>
-      <img src="share.png">
-      <h2>Link:</h2>
-      <h2 style="color:blue;">tinyurl.com/end-of-kaliyug</h2><h3>(or)</h3><h2 style="color:blue;">tinyurl.com/End-of-Kaliyuga</h2>
-    </div>
-      <script>
+
+<div id="share">
+
+  <h2>Please Share this to Your Friends & Family</h2>
+
+  <img src="share.png" alt="Share QR Code">
+
+  <h2>Link:</h2>
+
+  <h2 style="color:blue;">
+    tinyurl.com/end-of-kaliyug
+  </h2>
+
+  <h3>(or)</h3>
+
+  <h2 style="color:blue;">
+    tinyurl.com/End-of-Kaliyuga
+  </h2>
+
+</div>
+
+
+
+<script>
 
 const WEBAPP_URL =
-  "https://script.google.com/macros/s/AKfycbzqQiI4n2HkakM1guEKogr2KIaywbfOBVYyKweqdzWinG9-qHhfSfwBJqty62eXq0cvOg/exec";
-
-
-
+"https://script.google.com/macros/s/AKfycbzqQiI4n2HkakM1guEKogr2KIaywbfOBVYyKweqdzWinG9-qHhfSfwBJqty62eXq0cvOg/exec";
 
 
 // SAVE FEEDBACK
 async function saveAnswers() {
 
-  // Get selected radio buttons
   const coveredEl =
     document.querySelector('input[name="covered"]:checked');
 
@@ -213,60 +266,81 @@ async function saveAnswers() {
   const qualityEl =
     document.querySelector('input[name="quality"]:checked');
 
-
-
-  // Get values
-  const covered =
-    coveredEl ? coveredEl.value : "N/A";
-
   const role =
     document.getElementById("battleRole").value;
 
-  const visuals =
-    visualsEl ? visualsEl.value : "N/A";
-
   const improveText =
-    document.getElementById("improveText").value || "No suggestions";
+    document.getElementById("improveText").value.trim();
 
-  const quality =
-    qualityEl ? qualityEl.value : "N/A";
+  // Validation
+  if (
+    !coveredEl ||
+    !visualsEl ||
+    !qualityEl ||
+    role === "None"
+  ) {
 
+    alert("Please answer all required questions.");
+    return;
 
+  }
 
-  // Create object
   const feedbackData = {
 
-    covered: covered,
+    covered: coveredEl.value,
     role: role,
-    visuals: visuals,
-    improveText: improveText,
-    quality: quality
+    visuals: visualsEl.value,
+    improveText:
+      improveText || "No suggestions",
+    quality: qualityEl.value
 
   };
 
-
-
   try {
 
-    // Send data to Google Sheets
-    await fetch(WEBAPP_URL, {
+    const response =
+      await fetch(WEBAPP_URL, {
 
-      method: "POST",
+        method: "POST",
 
-      body: JSON.stringify(feedbackData)
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
 
-    });
+        body:
+          JSON.stringify(feedbackData)
 
+      });
 
+    if (!response.ok) {
 
-    // Success Message
+      throw new Error(
+        "Server returned an error"
+      );
+
+    }
+
     alert(
-      "The Gateway opens soon with Updates Given By You. Your feedback has been saved!"
+      "The Gateway opens soon with updates given by you. Your feedback has been saved!"
     );
 
+    // Reset form
+    document
+      .querySelectorAll(
+        'input[type="radio"]'
+      )
+      .forEach(r => r.checked = false);
 
+    document
+      .getElementById("battleRole")
+      .selectedIndex = 0;
 
-    // Reload feedback list
+    document
+      .getElementById("improveText")
+      .value = "";
+
+    // Reload feedback
     loadFeedback();
 
   }
@@ -275,13 +349,13 @@ async function saveAnswers() {
 
     console.error(error);
 
-    alert("Error saving feedback!");
+    alert(
+      "Error saving feedback. Please try again."
+    );
 
   }
 
 }
-
-
 
 
 
@@ -290,108 +364,111 @@ async function loadFeedback() {
 
   try {
 
-    // Get feedback data
     const response =
       await fetch(WEBAPP_URL);
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Failed to load feedback"
+      );
+
+    }
 
     const allFeedback =
       await response.json();
 
-
-
     const summary =
-      document.getElementById("summary");
+      document.getElementById(
+        "summary"
+      );
 
-
-
-    // Clear old feedback
     summary.innerHTML = "";
 
+    if (
+      !allFeedback ||
+      allFeedback.length === 0
+    ) {
 
+      summary.innerHTML =
+        "<p>No feedback submitted yet.</p>";
 
-    // Reverse array to show latest first
-    allFeedback.reverse().forEach((data, index) => {
+      document
+        .getElementById(
+          "feedbackBox"
+        )
+        .style.display = "block";
 
-      // Feedback numbering
-      const feedbackNumber =
-        allFeedback.length - index;
+      return;
 
+    }
 
+    allFeedback.reverse();
 
-      // Add feedback card
-      summary.innerHTML += `
+    allFeedback.forEach(
+      (data, index) => {
+
+        summary.innerHTML += `
 
         <div class="review-item">
 
           <h3>
-            Feedback #${feedbackNumber}
+            Feedback #${index + 1}
           </h3>
 
-          <b>
-            Knowledge about Chiranjeevas:
-          </b>
+          <p>
+            <b>Knowledge about Chiranjeevas:</b>
+            ${data.covered || "N/A"}
+          </p>
 
-          ${data.covered}
+          <p>
+            <b>Battle Role:</b>
+            ${data.role || "N/A"}
+          </p>
 
-          <br><br>
+          <p>
+            <b>Visual Feedback:</b>
+            ${data.visuals || "N/A"}
+          </p>
 
+          <p>
+            <b>Suggestion:</b>
+            ${data.improveText || "None"}
+          </p>
 
-
-          <b>
-            Battle Role:
-          </b>
-
-          ${data.role}
-
-          <br><br>
-
-
-
-          <b>
-            Visual Feedback:
-          </b>
-
-          ${data.visuals}
-
-          <br><br>
-
-
-
-          <b>
-            Your Idea:
-          </b>
-
-          "${data.improveText}"
-
-          <br><br>
-
-
-
-          <b>
-            Kalki Attribute:
-          </b>
-
-          ${data.quality}
-
-          <br>
+          <p>
+            <b>Kalki Attribute:</b>
+            ${data.quality || "N/A"}
+          </p>
 
         </div>
 
-      `;
+        `;
 
-    });
+      }
+    );
 
-
-
-    // Show feedback box
-    document.getElementById("feedbackBox")
+    document
+      .getElementById(
+        "feedbackBox"
+      )
       .style.display = "block";
 
   }
 
   catch (error) {
 
-    console.error(error);
+    console.error(
+      "Load Error:",
+      error
+    );
+
+    document
+      .getElementById(
+        "summary"
+      )
+      .innerHTML =
+      "<p>Unable to load feedback.</p>";
 
   }
 
@@ -399,16 +476,15 @@ async function loadFeedback() {
 
 
 
-
-
-// Load feedback when page opens
+// LOAD ON PAGE OPEN
 window.onload = function () {
 
   loadFeedback();
 
 };
 
-      </script>
+</script>
+
 </body>
 
 </html>
