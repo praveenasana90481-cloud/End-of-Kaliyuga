@@ -6,98 +6,192 @@
     <meta name="description" content="Learn about Kalki, the 10th avatar of Vishnu, in Hindu mythology. Discover the role and significance of this future savior who will restore cosmic order.">
     <title>KALKI - The 10th Avatar of Vishnu</title>
     <style>
-        body {
-            background-image: url("earth.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            font-family: 'Raleway', 'Lato', 'Roboto', sans-serif;
-            color: #333;
-        }
-        #KALKI {
-            color: rgb(255, 0, 0);
-            background-color: rgba(0, 242, 255, 0.73);
-            padding: 5px 5px;
-            font-size: 350px;
-            font-family: Arial, Helvetica, sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-top: 10px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        #content {
-            background-color: rgba(250, 235, 215, 0.8);
-            color: #000080;
-            padding: 30px 40px;
-            margin: 20px 100px;
-            border-radius: 10px;
-        }
-        h1, h2 {
-            color: #000080;
-            font-size: 30px;
-            text-align: center;
-        }
-        #NEXT {
-            background-color: rgb(255, 145, 0);
-            color: red;
-            padding: 30px 20px;
-            font-size: 50px;
-            border-radius: 10px;
-            transition: all 0.5s ease;
-            margin-top: 20px;
-        }
-        #NEXT:hover {
-            background-color: rgb(0, 200, 255);
-            color: orchid;
-            transform: scale(1.1);
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            text-align: justify;
-            font-family: sans-serif,bold,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        }
-        blockquote {
-            font-size: 40px;
-            font-style: italic;
-            text-align: center;
-        }
-        .info-section{
-            background-color: #f5d503c7;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            animation: fadeSlide 1s ease forwards;
-            transform: translateY(30);
-            border: 2px solid gold;
-            }
-        .info-section:hover{
-            background-color: #f57c03;
-            border-radius: 35px;
-            margin-bottom: 25px;
-            transform: scale(1.05);
-        }
-        @keyframes fadeSlide {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-        }
-    
-        .info-section:nth-child(2) { animation-delay: 0.3s; }
-        .info-section:nth-child(3) { animation-delay: 0.6s; }
-        .info-section:nth-child(4) { animation-delay: 0.9s; }
-        .info-section:nth-child(5) { animation-delay: 1.2s; }
-        .info-section:nth-child(6) { animation-delay: 1.5s; }
-        .info-section:nth-child(7) { animation-delay: 1.8s; }
-        .info-section:nth-child(8) { animation-delay: 2.1s; }
-        #print {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 20px;
-            cursor: pointer;
-            background-color: #03f5f5;
-            border-radius: 10px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-image:url("earth.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    font-family:'Raleway','Lato','Roboto',sans-serif;
+    color:#333;
+    min-height:100vh;
+}
+
+/* KALKI TITLE */
+
+#KALKI{
+    color:red;
+    background-color:rgba(0,242,255,0.73);
+    padding:15px;
+    font-size:clamp(40px,12vw,180px);
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    margin:15px auto;
+    border-radius:15px;
+    text-align:center;
+    width:95%;
+    max-width:1400px;
+}
+
+/* QUOTE */
+
+blockquote{
+    font-size:inherit;
+    font-style:italic;
+    margin:0;
+}
+
+/* CONTENT AREA */
+
+#content{
+    background-color:rgba(250,235,215,0.85);
+    color:#000080;
+    padding:25px;
+    width:95%;
+    max-width:1400px;
+    margin:20px auto;
+    border-radius:15px;
+}
+
+/* HEADINGS */
+
+h1,h2{
+    color:#000080;
+    text-align:center;
+    font-size:clamp(22px,4vw,36px);
+    margin-bottom:15px;
+}
+
+/* PARAGRAPHS */
+
+p{
+    font-size:clamp(14px,2vw,18px);
+    line-height:1.8;
+    text-align:justify;
+    font-family:'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+/* INFO SECTIONS */
+
+.info-section{
+    background-color:#f5d503c7;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:25px;
+    border:2px solid gold;
+    animation:fadeSlide 1s ease forwards;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.5s ease;
+}
+
+.info-section:hover{
+    background-color:#f57c03;
+    transform:scale(1.03);
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.info-section:nth-child(1){animation-delay:0.3s;}
+.info-section:nth-child(2){animation-delay:0.6s;}
+.info-section:nth-child(3){animation-delay:0.9s;}
+.info-section:nth-child(4){animation-delay:1.2s;}
+.info-section:nth-child(5){animation-delay:1.5s;}
+.info-section:nth-child(6){animation-delay:1.8s;}
+.info-section:nth-child(7){animation-delay:2.1s;}
+.info-section:nth-child(8){animation-delay:2.4s;}
+.info-section:nth-child(9){animation-delay:2.7s;}
+
+/* PRINT BUTTON */
+
+#print{
+    padding:15px 25px;
+    font-size:clamp(14px,2vw,20px);
+    margin:20px;
+    cursor:pointer;
+    background-color:#03f5f5;
+    border:none;
+    border-radius:10px;
+    transition:0.4s;
+}
+
+#print:hover{
+    transform:scale(1.05);
+}
+
+/* NEXT BUTTON */
+
+#NEXT{
+    background-color:rgb(255,145,0);
+    color:red;
+    padding:20px;
+    width:90%;
+    max-width:450px;
+    font-size:clamp(18px,4vw,40px);
+    border:none;
+    border-radius:12px;
+    transition:all 0.5s ease;
+    margin-top:20px;
+    cursor:pointer;
+}
+
+#NEXT:hover{
+    background-color:rgb(0,200,255);
+    color:orchid;
+    transform:scale(1.05);
+}
+
+#NEXT a{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+}
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    #content{
+        padding:15px;
+    }
+
+    .info-section{
+        padding:15px;
+    }
+}
+
+@media screen and (max-width:480px){
+
+    #KALKI{
+        font-size:50px;
+        padding:10px;
+    }
+
+    p{
+        text-align:left;
+    }
+
+    #NEXT{
+        width:95%;
+    }
+}
     </style>
 </head>
 <body>
