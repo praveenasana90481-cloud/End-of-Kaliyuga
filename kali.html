@@ -7,92 +7,173 @@
         <title>KALI PURUSHA - The Villain of Kali Yuga</title>
         <style>
             body {
-                background-image: url("hell.jpg");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
-                font-family: 'Arial', sans-serif;
-                color: white;
-                padding-top: 20px;
-            }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-            h1 {
-                text-align: center;
-                color: #ffcc00;
-                font-size: 80px;
-                margin-top: 10%;
-                background-color: rgba(25, 41, 204, 0.7);
-                width: fit-content;
-                font-family: 'Georgia', serif;
-            }
+body{
+    background-image:url("hell.jpg");
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
+    font-family:Arial,sans-serif;
+    color:white;
+    padding:20px 10px;
+    min-height:100vh;
+}
 
-            #content {
-                background-color: rgba(0, 0, 0, 0.7);
-                padding: 30px;
-                margin: 20px auto;
-                width: 80%;
-                border-radius: 15px;
-            }
+/* TITLE */
 
-            #a,#b,#c,#d,#e,#f,#g{
-                background-color: rgba(158, 36, 168, 0.825);
-                border-radius: 10px;
-                font-weight: lighter;
-                border: 2px solid blueviolet;
-                margin-bottom: 50px;
-                transition: all 0.8s ease-in-out;
-            }
+h1{
+    text-align:center;
+    color:#ffcc00;
+    font-size:clamp(35px,8vw,80px);
+    margin:20px auto;
+    background-color:rgba(25,41,204,0.7);
+    width:95%;
+    max-width:900px;
+    padding:15px;
+    border-radius:15px;
+    font-family:Georgia,serif;
+}
 
-            #a:hover,#b:hover,#c:hover,#d:hover,#e:hover,#f:hover,#g:hover{
-                font-weight: bolder;
-                transform: scale(1.1);
-            }
+/* MAIN CONTENT */
 
-            h2 {
-                color: #ff6347;
-                font-size: 30px;
-                text-align: center;
-            }
+#content{
+    background-color:rgba(0,0,0,0.75);
+    padding:25px;
+    margin:20px auto;
+    width:95%;
+    max-width:1400px;
+    border-radius:15px;
+}
 
-            p {
-                font-size: 18px;
-                line-height: 1.6;
-                text-align: justify;
-                margin-bottom: 20px;
-            }
+/* SECTIONS */
 
-            blockquote {
-                font-size: 24px;
-                font-style: italic;
-                text-align: center;
-                color: #ff6347;
-            }
+#a,#b,#c,#d,#e,#f,#g{
+    background-color:rgba(158,36,168,0.825);
+    border-radius:15px;
+    border:2px solid blueviolet;
+    margin-bottom:30px;
+    padding:20px;
+    transition:all 0.5s ease;
+}
 
-            #print {
-                background-color: #ff6347;
-                color: white;
-                font-size: 18px;
-                padding: 10px 20px;
-                cursor: pointer;
-                margin-top: 30px;
-            }
+#a:hover,
+#b:hover,
+#c:hover,
+#d:hover,
+#e:hover,
+#f:hover,
+#g:hover{
+    transform:scale(1.03);
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
 
-            #next {
-                background-color: #ff6347;
-                color: white;
-                font-size: 18px;
-                padding: 10px 20px;
-                border: none;
-                cursor: pointer;
-                margin-top: 30px;
-                transition: all ease-in 2s;
-                border-radius: 10px;
-            }
+/* HEADINGS */
 
-            #next:hover {
-                background-color: #ff4500;
-                transform: scale(1.1);
-            }
+h2{
+    color:#ff6347;
+    font-size:clamp(22px,4vw,32px);
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* PARAGRAPHS */
+
+p{
+    font-size:clamp(14px,2vw,18px);
+    line-height:1.8;
+    text-align:justify;
+}
+
+/* QUOTES */
+
+blockquote{
+    font-size:clamp(18px,4vw,28px);
+    font-style:italic;
+    text-align:center;
+    color:#ff6347;
+}
+
+/* PRINT BUTTON */
+
+#print{
+    background-color:#ff6347;
+    color:white;
+    font-size:clamp(14px,2vw,18px);
+    padding:15px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:0.4s;
+}
+
+#print:hover{
+    transform:scale(1.05);
+}
+
+/* NEXT BUTTON */
+
+#next{
+    background-color:#ff6347;
+    color:white;
+    font-size:clamp(16px,3vw,22px);
+    padding:15px 25px;
+    border:none;
+    cursor:pointer;
+    margin-top:20px;
+    transition:all 0.5s ease;
+    border-radius:10px;
+}
+
+#next:hover{
+    background-color:#ff4500;
+    transform:scale(1.05);
+}
+
+#next a{
+    color:white;
+    text-decoration:none;
+    display:block;
+}
+
+/* TABLET */
+
+@media screen and (max-width:768px){
+
+    #content{
+        padding:15px;
+    }
+
+    #a,#b,#c,#d,#e,#f,#g{
+        padding:15px;
+    }
+}
+
+/* MOBILE */
+
+@media screen and (max-width:480px){
+
+    h1{
+        font-size:40px;
+        padding:10px;
+    }
+
+    p{
+        text-align:left;
+    }
+
+    #print,
+    #next{
+        width:90%;
+        max-width:300px;
+    }
+}
         </style>
     </head>
     <body>
