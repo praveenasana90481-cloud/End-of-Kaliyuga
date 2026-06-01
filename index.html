@@ -5,118 +5,219 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAPTA CHIRANJEEVA'S</title>
 <style>
-    body {
-        background-image: url("background.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        font-family: cursive;
-        color: black;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-image:url("background.jpg");
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    font-family:cursive;
+    color:black;
+    font-size:clamp(14px,2vw,20px);
+    min-height:100vh;
+}
+
+/* Start Button */
+
+#start{
+    background-color:rgb(255,24,24);
+    margin-top:20vh;
+    border-radius:12px;
+    font-weight:lighter;
+    padding:25px;
+    width:90%;
+    max-width:500px;
+    font-size:clamp(18px,3vw,28px);
+    cursor:pointer;
+    transition:all 0.7s ease;
+    border:none;
+}
+
+#start:hover{
+    background-color:rgb(234,246,6);
+    transform:scale(1.05);
+    font-weight:bolder;
+    box-shadow:0px 15px 30px rgba(0,0,0,0.8);
+}
+
+/* Main Content */
+
+#content{
+    display:none;
+    margin-top:20px;
+    background-image:url("green background.jpg");
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size:cover;
+    padding:20px;
+}
+
+/* Heading */
+
+h1{
+    background-color:antiquewhite;
+    color:#00FFFF;
+    text-align:center;
+    margin:30px auto;
+    padding:15px;
+    font-size:clamp(28px,5vw,55px);
+    border-radius:12px;
+}
+
+/* Sections */
+
+.chiranjeevi-section{
+    background-color:rgba(227,219,10,0.5);
+    padding:20px;
+    border-radius:20px;
+    margin:30px auto;
+    width:95%;
+    max-width:1200px;
+    border:2px solid gold;
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeSlide 1s ease forwards;
+    transition:all 0.8s ease;
+}
+
+.chiranjeevi-section:hover{
+    transform:scale(1.03);
+    background-color:rgba(244,255,95,0.7);
+    box-shadow:0px 15px 35px rgba(255,215,0,0.8);
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.chiranjeevi-section:nth-child(2){animation-delay:0.3s;}
+.chiranjeevi-section:nth-child(3){animation-delay:0.6s;}
+.chiranjeevi-section:nth-child(4){animation-delay:0.9s;}
+.chiranjeevi-section:nth-child(5){animation-delay:1.2s;}
+.chiranjeevi-section:nth-child(6){animation-delay:1.5s;}
+.chiranjeevi-section:nth-child(7){animation-delay:1.8s;}
+.chiranjeevi-section:nth-child(8){animation-delay:2.1s;}
+
+h2{
+    color:darkred;
+    text-align:center;
+    text-shadow:1px 1px 6px white;
+    font-size:clamp(22px,3vw,36px);
+    margin-bottom:15px;
+}
+
+p{
+    line-height:1.8;
+    text-align:justify;
+}
+
+/* Print Button */
+
+#print{
+    background-color:yellow;
+    color:red;
+    margin-top:50px;
+    padding:15px 25px;
+    width:90%;
+    max-width:300px;
+    font-size:clamp(14px,2vw,20px);
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0px 10px 20px rgba(9,9,9,0.7);
+}
+
+/* Next Button */
+
+#next{
+    margin-top:40px;
+    display:block;
+    background-color:red;
+    border-radius:15px;
+    color:rgb(129,235,76);
+    padding:20px;
+    width:90%;
+    max-width:600px;
+    font-size:clamp(18px,4vw,40px);
+    font-weight:bold;
+    text-align:center;
+    transition:all 0.5s ease;
+    border:none;
+    cursor:pointer;
+}
+
+#next:hover{
+    background-color:yellow;
+    color:red;
+    transform:scale(1.05);
+    box-shadow:0px 15px 30px rgba(9,9,9,0.8);
+}
+
+/* Responsive Images */
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+/* Tablet */
+
+@media screen and (max-width:768px){
+
+    h1{
+        font-size:35px;
     }
 
-    #start {
-        background-color: rgb(255, 24, 24);
-        margin-top: 150px;
-        border-radius: 10px;
-        font-weight: lighter;
-        padding: 40px 20px;
-        transition: all 0.7s ease;
-        cursor: pointer;
-    }
-    #start:hover {
-        background-color: rgb(234, 246, 6);
-        padding: 70px 60px;
-        transform: scale(1.1);
-        font-weight: bolder;
-        font-size: 20px;
-        box-shadow: 0px 50px 40px rgba(0, 0, 0, 0.9);
+    .chiranjeevi-section{
+        width:98%;
+        padding:15px;
     }
 
-    #content {
-        display: none;
-        margin-top: 20px;
-        background-image: url("green background.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
+    p{
+        font-size:15px;
+    }
+}
+
+/* Mobile */
+
+@media screen and (max-width:480px){
+
+    #start{
+        margin-top:15vh;
+        padding:20px;
     }
 
-    h1 {
-        background-color: antiquewhite;
-        color: #00FFFF;
-        text-align: center;
-        margin-top: 40px;
-        font-size: 50px;
+    h1{
+        font-size:28px;
     }
 
-    .chiranjeevi-section {
-        background-color: rgba(227, 219, 10, 0.5);
-        padding: 20px;
-        border-radius: 20px;
-        margin-top: 58px;
-        font-weight: lighter;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all ease 1s;
-        animation: fadeSlide 1s ease forwards;
-        border: 2px solid gold;
+    h2{
+        font-size:22px;
     }
 
-    .chiranjeevi-section:hover {
-        transform: scale(1.05);
-        transition: all ease 1s;
-        font-weight: bolder;
-        background-color: rgba(244, 255, 95, 0.668);
-        box-shadow: 0px 20px 40px rgba(255,215,0,0.8);
+    p{
+        font-size:14px;
+        line-height:1.6;
     }
 
-    @keyframes fadeSlide {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
+    #next{
+        font-size:18px;
+        padding:15px;
     }
-
-    .chiranjeevi-section:nth-child(2) { animation-delay: 0.3s; }
-    .chiranjeevi-section:nth-child(3) { animation-delay: 0.6s; }
-    .chiranjeevi-section:nth-child(4) { animation-delay: 0.9s; }
-    .chiranjeevi-section:nth-child(5) { animation-delay: 1.2s; }
-    .chiranjeevi-section:nth-child(6) { animation-delay: 1.5s; }
-    .chiranjeevi-section:nth-child(7) { animation-delay: 1.8s; }
-    .chiranjeevi-section:nth-child(8) { animation-delay: 2.1s; }
-
-    h2 {
-        color: darkred;
-        text-align: center;
-        text-shadow: 1px 1px 6px #fff;
-    }
-
-    p { line-height: 1.6; }
-
-    #print{
-        background-color: yellow;
-        color: red;
-        margin-top: 60px;
-        padding: 10px 15px;
-        box-shadow: 0px 50px 40px rgba(9, 9, 9, 0.9);
-    }
-
-    #next {
-        margin-top: 60px;
-        display: block;
-        background-color: red;
-        border-radius: 15px;
-        color: rgb(129, 235, 76);
-        padding: 35px 30px;
-        font-size: 40px;
-        font-weight: bold;
-        text-align: center;
-        transition: all 0.5s ease;
-    }
-    #next:hover {
-        background-color: yellow;
-        color: red;
-        transform: scale(1.1);
-        box-shadow: 0px 50px 40px rgba(9, 9, 9, 0.9);
-    }
+  }
 </style>
 </head>
 <body>
