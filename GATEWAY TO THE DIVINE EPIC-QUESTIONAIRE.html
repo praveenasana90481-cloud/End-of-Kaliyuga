@@ -193,9 +193,10 @@ body {
      </h2>
 
  </div>
-</body>
-<script>
 
+<script>
+const WEBAPP_URL =
+"https://script.google.com/macros/s/AKfycbzP9dc5oY2YRxRWLj-uC8hiafhF332Y2lXYZKN7uhNiI_ocdMrnwUX4Sxfja18SvswiTA/exec";
 async function saveAnswers() {
 
   // Prevent repeat submissions for 24 hours
@@ -362,13 +363,6 @@ async function saveAnswers() {
       )
       .value = "";
 
-
-
-    setTimeout(
-      loadFeedback,
-      1000
-    );
-
   }
 
   catch (error) {
@@ -394,16 +388,6 @@ async function saveAnswers() {
 
 }
 
-
-
-// LOAD REVIEWS WHEN PAGE OPENS
-window.onload = function () {
-
-  loadFeedback();
-
-};
-
-//
-  </script>
+ </script>
 </body>
 </html>
